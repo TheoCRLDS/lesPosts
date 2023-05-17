@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Post from "../Components/Post";
 
@@ -10,12 +10,23 @@ function App() {
       author: "Elon Musk",
       likes: 0,
     },
+    {
+      title: "My rocket",
+      content: "Look, I built a new rocket",
+      author: "Elon Musk",
+      likes: 0,
+    },
+    {
+      title: "My rocket",
+      content: "Look, I built a new rocket",
+      author: "Elon Musk",
+      likes: 0,
+    },
   ]);
 
-  const updateLike = () => {
-    post[0].likes += 1;
-    setPost([...post]);
-    console.log(post[0].likes);
+  const updateLike = (key) => {
+    setPost([...post], (post[key].likes += 1));
+    console.log(post[key].likes);
   };
 
   const displayPost = () => {
@@ -27,7 +38,7 @@ function App() {
           content={e.content}
           author={e.author}
           like={e.likes}
-          handleClick={updateLike}
+          handleClick={() => updateLike(key)}
         />
       );
     });
